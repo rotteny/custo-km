@@ -40,7 +40,7 @@
                             suffix="%"
                             :minFractionDigits="2" />
                     </div>
-                    <small class="block text-xs text-gray-400 mt-2">Taxa cobrada pelo aplicativo.</small>
+                    <small class="block text-xs text-gray-400 mt-2">Taxa cobrada pelo aplicativo. Corridas feitas no particular podem usar taxa de 0% para calculo do custo.</small>
                 </div>
             </div>
 
