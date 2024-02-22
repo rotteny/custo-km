@@ -12,7 +12,7 @@
     
         <div class="content text-sm">
             <div class="p-2">
-                <div class="my-2">
+                <div class="mt-2">
                     <div>
                         <label for="automovel" class="block mr-2">Automóvel de Referência</label>
                         <Dropdown 
@@ -25,6 +25,22 @@
                             @change="onChangeAutomovel(selected)" />
                     </div>
                     <small class="block text-xs text-gray-400 mt-2">Veículo de referência para cálculo de custo por Km</small>
+                </div>
+            </div>
+
+            <div class="p-2">
+                <div class="mb-2">
+                    <div>
+                        <label for="aplicativo" class="block mr-2">Taxa do Aplicativo</label>
+                        <InputNumber 
+                            inputId="aplicativo"
+                            class="w-full"
+                            v-model="automovel.aplicativo" 
+                            mode="decimal" 
+                            suffix="%"
+                            :minFractionDigits="2" />
+                    </div>
+                    <small class="block text-xs text-gray-400 mt-2">Taxa cobrada pelo aplicativo.</small>
                 </div>
             </div>
 
@@ -597,6 +613,8 @@
                         oleo_frequencia: 10000,
                         custo_oleo: 0,
 
+                        aplicativo: 10,
+
                         outros: 0,
                         custo_outros: 0,
 
@@ -644,6 +662,8 @@
                         oleo_frequencia: 10000,
                         custo_oleo: 0,
 
+                            aplicativo: 10,
+
                         outros: 5000,
                         custo_outros: 0,
 
@@ -690,6 +710,8 @@
                         oleo_custo: 500,
                         oleo_frequencia: 10000,
                         custo_oleo: 0,
+
+                            aplicativo: 10,
 
                         outros: 1500,
                         custo_outros: 0,
@@ -769,7 +791,7 @@
                                              veiculo.custo_oleo + 
                                              veiculo.custo_outros + 
                                              veiculo.custo_lucro + 
-                                             veiculo.custo_gasolina );
+                                             veiculo.custo_gasolina ) * (1 + (veiculo.aplicativo/100));
             },
             custoKmAlcool(veiculo) {
                 veiculo.custo_km_alcool = (veiculo.custo_veiculo + 
@@ -778,7 +800,7 @@
                                              veiculo.custo_oleo + 
                                              veiculo.custo_outros + 
                                              veiculo.custo_lucro + 
-                                             veiculo.custo_alcool );
+                                             veiculo.custo_alcool ) * (1 + (veiculo.aplicativo/100));
             },
             custoKmGas(veiculo) {
                 veiculo.custo_km_gas = (veiculo.custo_veiculo + 
@@ -787,7 +809,7 @@
                                              veiculo.custo_oleo + 
                                              veiculo.custo_outros + 
                                              veiculo.custo_lucro + 
-                                             veiculo.custo_gas );
+                                             veiculo.custo_gas ) * (1 + (veiculo.aplicativo/100));
             },
             custoKmDisel(veiculo) {
                 veiculo.custo_km_disel = (veiculo.custo_veiculo + 
@@ -796,7 +818,7 @@
                                              veiculo.custo_oleo + 
                                              veiculo.custo_outros + 
                                              veiculo.custo_lucro + 
-                                             veiculo.custo_disel );
+                                             veiculo.custo_disel ) * (1 + (veiculo.aplicativo/100));
             },
         }
     }
