@@ -14,9 +14,8 @@
             <div class="p-2">
                 <div class="mt-2">
                     <div>
-                        <label for="automovel" class="block mr-2">Automóvel de Referência</label>
+                        <label class="block mr-2">Automóvel de Referência</label>
                         <Dropdown 
-                            inputId="automovel"
                             class="w-full"
                             v-model="selected" 
                             :options="list" 
@@ -31,14 +30,14 @@
             <div class="p-2">
                 <div class="mb-2">
                     <div>
-                        <label for="aplicativo" class="block mr-2">Taxa do Aplicativo</label>
+                        <label class="block mr-2">Taxa do Aplicativo</label>
                         <InputNumber 
-                            inputId="aplicativo"
                             class="w-full"
-                            v-model="automovel.aplicativo" 
+                            v-model="aplicativo" 
                             mode="decimal" 
+                            :minFractionDigits="2"
                             suffix="%"
-                            :minFractionDigits="2" />
+                        />
                     </div>
                     <small class="block text-xs text-gray-400 mt-2">Taxa cobrada pelo aplicativo. Corridas feitas no particular podem usar taxa de 0% para calculo do custo.</small>
                 </div>
@@ -49,48 +48,47 @@
                     <div>
                         <div class="my-2">
                             <div>
-                                <label for="valor" class="block mr-2">Valor do veículo</label>
+                                <label class="block mr-2">Valor do veículo</label>
                                 <InputNumber 
-                                    inputId="valor"
                                     class="w-full"
                                     v-model="automovel.valor"
                                     mode="decimal" 
+                                    :minFractionDigits="2"
                                     prefix="R$ "
-                                    :minFractionDigits="2" />
+                                />
                             </div>
                             <small class="block text-xs text-gray-400 mt-2">Valor atual do veículo para calculo de depreciação.</small>
                         </div>
                         <div class="my-2">
                             <div>
-                                <label for="depreciacao" class="block mr-2">Depreciacao do veículo</label>
+                                <label class="block mr-2">Depreciacao do veículo</label>
                                 <InputNumber 
-                                    inputId="depreciacao"
                                     class="w-full"
                                     v-model="automovel.depreciacao" 
                                     mode="decimal" 
+                                    :minFractionDigits="2"
                                     suffix="%"
-                                    :minFractionDigits="2" />
+                                />
                             </div>
                             <small class="block text-xs text-gray-400 mt-2">Percentual de depreciação do veículo. Vaículos em aplicativos chegam a depreciar 20% por ano.</small>
                         </div>
                         <div class="my-2">
                             <div>
-                                <label for="financiamento" class="block mr-2">Financiamento/Consórcio</label>
+                                <label class="block mr-2">Financiamento/Consórcio</label>
                                 <InputNumber 
-                                    inputId="financiamento"
                                     class="w-full"
                                     v-model="automovel.financiamento" 
                                     mode="decimal" 
+                                    :minFractionDigits="2"
                                     prefix="R$ "
-                                    :minFractionDigits="2" />
+                                />
                             </div>
                             <small class="block text-xs text-gray-400 mt-2">Valor da prestação do financiamento ou consórcio que esteja pagando.</small>
                         </div>
                         <div class="my-2">
                             <div>
-                                <label for="km_mes" class="block mr-2">Km/Mês</label>
+                                <label class="block mr-2">Km/Mês</label>
                                 <InputNumber 
-                                    inputId="km_mes"
                                     class="w-full"
                                     v-model="automovel.km_mes" 
                                     suffix="Km" />
@@ -99,15 +97,14 @@
                         </div>
                         <div class="my-2">
                             <div>
-                                <label for="custo_veiculo" class="block mr-2">Custo do veículo por Km</label>
+                                <label class="block mr-2">Custo do veículo por Km</label>
                                 <InputNumber 
-                                    inputId="custo_veiculo"
                                     v-model="automovel.custo_veiculo" 
                                     :value="custoVeiculo(automovel)"
                                     class="disabled w-full"
                                     mode="decimal" 
-                                    prefix="R$ "
                                     :minFractionDigits="2"
+                                    prefix="R$ "
                                     :readonly="true" />
                             </div>
                             <small class="block text-xs text-gray-400 mt-2">Custo do veículo por Km percorrido.</small>
@@ -117,43 +114,42 @@
                     <div class="mx-2">
                         <div class="my-2">
                             <div>
-                                <label for="licenciamento" class="block mr-2">Liscenciamento</label>
+                                <label class="block mr-2">Liscenciamento</label>
                                 <InputNumber 
-                                    inputId="licenciamento"
                                     class="w-full"
                                     v-model="automovel.licenciamento" 
                                     mode="decimal" 
+                                    :minFractionDigits="2"
                                     prefix="R$ "
-                                    :minFractionDigits="2" />
+                                />
                             </div>
                             <small class="block text-xs text-gray-400 mt-2">Valor anual cobrado pelo com IPVA e seguro obrigatório.</small>
                         </div>
     
                         <div class="my-2">
                             <div>
-                                <label for="seguro" class="block mr-2">Seguro Anual</label>
+                                <label class="block mr-2">Seguro Anual</label>
                                 <InputNumber 
-                                    inputId="seguro"
                                     class="w-full"
                                     v-model="automovel.seguro" 
                                     mode="decimal" 
+                                    :minFractionDigits="2"
                                     prefix="R$ "
-                                    :minFractionDigits="2" />
+                                />
                             </div>
                             <small class="block text-xs text-gray-400 mt-2">Valor total anual gasto em seguro particular.</small>
                         </div>
     
                         <div class="my-2">
                             <div>
-                                <label for="custo_terceiro" class="block mr-2">Custo com terceiros por Km</label>
+                                <label class="block mr-2">Custo com terceiros por Km</label>
                                 <InputNumber 
-                                    inputId="custo_terceiro"
                                     v-model="automovel.custo_terceiro" 
                                     :value="custoTerceiro(automovel)"
                                     class="disabled w-full"
                                     mode="decimal" 
-                                    prefix="R$ "
                                     :minFractionDigits="2"
+                                    prefix="R$ "
                                     :readonly="true" />
                             </div>
                             <small class="block text-xs text-gray-400 mt-2">Custo com terceiros por Km percorrido.</small>
@@ -163,43 +159,42 @@
                     <div class="mx-2">
                         <div class="my-2">
                             <div>
-                                <label for="pneus_custo" class="block mr-2">Custo com troca de pneus</label>
+                                <label class="block mr-2">Custo com troca de pneus</label>
                                 <InputNumber 
-                                    inputId="pneus_custo"
                                     class="w-full"
                                     v-model="automovel.pneus_custo" 
                                     mode="decimal" 
+                                    :minFractionDigits="2"
                                     prefix="R$ "
-                                    :minFractionDigits="2" />
+                                />
                             </div>
                             <small class="block text-xs text-gray-400 mt-2">Inclua o custo válvulas, alinhamento e balanceamento.</small>
                         </div>
     
                         <div class="my-2">
                             <div>
-                                <label for="pneus_vida" class="block mr-2">Vida útil dos pneus</label>
+                                <label class="block mr-2">Vida útil dos pneus</label>
                                 <InputNumber 
-                                    inputId="pneus_vida"
                                     class="w-full"
                                     v-model="automovel.pneus_vida" 
                                     mode="decimal" 
+                                    :minFractionDigits="2"
                                     suffix="Km"
-                                    :minFractionDigits="2" />
+                                />
                             </div>
                             <small class="block text-xs text-gray-400 mt-2">Quantidade máxima de Km percorridos para a troca dos pneus.</small>
                         </div>
     
                         <div class="my-2">
                             <div>
-                                <label for="custo_pneus" class="block mr-2">Custo com pneus por Km</label>
+                                <label class="block mr-2">Custo com pneus por Km</label>
                                 <InputNumber 
-                                    inputId="custo_pneus"
                                     v-model="automovel.custo_pneus" 
                                     :value="custoPneus(automovel)"
                                     class="disabled w-full"
                                     mode="decimal" 
-                                    prefix="R$ "
                                     :minFractionDigits="2"
+                                    prefix="R$ "
                                     :readonly="true" />
                             </div>
                             <small class="block text-xs text-gray-400 mt-2">Custo com terceiros por Km percorrido.</small>
@@ -210,43 +205,42 @@
     
                         <div class="my-2">
                             <div>
-                                <label for="oleo_custo" class="block mr-2">Valor da troca de óleo</label>
+                                <label class="block mr-2">Valor da troca de óleo</label>
                                 <InputNumber 
-                                    inputId="oleo_custo"
                                     class="w-full"
                                     v-model="automovel.oleo_custo" 
                                     mode="decimal" 
+                                    :minFractionDigits="2"
                                     prefix="R$ "
-                                    :minFractionDigits="2" />
+                                />
                             </div>
                             <small class="block text-xs text-gray-400 mt-2">Inclua o custo com óleo, filtro de óleo, filtro de ar e demais peças.</small>
                         </div>
     
                         <div class="my-2">
                             <div>
-                                <label for="oleo_frequencia" class="block mr-2">Frequência da troca de óleo</label>
+                                <label class="block mr-2">Frequência da troca de óleo</label>
                                 <InputNumber 
-                                    inputId="oleo_frequencia"
                                     class="w-full"
                                     v-model="automovel.oleo_frequencia" 
                                     mode="decimal" 
+                                    :minFractionDigits="2"
                                     suffix="Km"
-                                    :minFractionDigits="2" />
+                                />
                             </div>
                             <small class="block text-xs text-gray-400 mt-2">Em quantos Km é feita a troca do óleo.</small>
                         </div>
     
                         <div class="my-2">
                             <div>
-                                <label for="custo_oleo" class="block mr-2">Custo com troca de óleo por Km</label>
+                                <label class="block mr-2">Custo com troca de óleo por Km</label>
                                 <InputNumber 
-                                    inputId="custo_oleo"
                                     v-model="automovel.custo_oleo" 
                                     :value="custoOleo(automovel)"
                                     class="disabled w-full"
                                     mode="decimal" 
-                                    prefix="R$ "
                                     :minFractionDigits="2"
+                                    prefix="R$ "
                                     :readonly="true" />
                             </div>
                             <small class="block text-xs text-gray-400 mt-2">Custo com terceiros por Km percorrido.</small>
@@ -256,29 +250,28 @@
                     <div class="mx-2">
                         <div class="my-2">
                             <div>
-                                <label for="outros" class="block mr-2">Manutenção anual</label>
+                                <label class="block mr-2">Manutenção anual</label>
                                 <InputNumber 
-                                    inputId="outros"
                                     class="w-full"
                                     v-model="automovel.outros" 
                                     mode="decimal" 
+                                    :minFractionDigits="2"
                                     prefix="R$ "
-                                    :minFractionDigits="2" />
+                                />
                             </div>
                             <small class="block text-xs text-gray-400 mt-2">Gasto anual com peças e mão de obra, oriumdos de desgastes e acidentes.</small>
                         </div>
     
                         <div class="my-2">
                             <div>
-                                <label for="custo_outros" class="block mr-2">Custo com manutenção por Km</label>
+                                <label class="block mr-2">Custo com manutenção por Km</label>
                                 <InputNumber 
-                                    inputId="custo_outros"
                                     v-model="automovel.custo_outros" 
                                     :value="custoOutros(automovel)"
                                     class="disabled w-full"
                                     mode="decimal" 
-                                    prefix="R$ "
                                     :minFractionDigits="2"
+                                    prefix="R$ "
                                     :readonly="true" />
                             </div>
                             <small class="block text-xs text-gray-400 mt-2">Custo com despesas de manutenção do veículo.</small>
@@ -288,29 +281,28 @@
                     <div>
                         <div class="my-2">
                             <div>
-                                <label for="lucro" class="block mr-2">Luco/Salário</label>
+                                <label class="block mr-2">Luco/Salário</label>
                                 <InputNumber 
-                                    inputId="lucro"
                                     class="w-full"
                                     v-model="automovel.lucro" 
                                     mode="decimal" 
+                                    :minFractionDigits="2"
                                     prefix="R$ "
-                                    :minFractionDigits="2" />
+                                />
                             </div>
                             <small class="block text-xs text-gray-400 mt-2">Remuneração mínima esperada pelo trabalho mensal.</small>
                         </div>
     
                         <div class="my-2">
                             <div>
-                                <label for="custo_lucro" class="block mr-2">Custo por Km com lucro</label>
+                                <label class="block mr-2">Custo por Km com lucro</label>
                                 <InputNumber 
-                                    inputId="custo_lucro"
                                     v-model="automovel.custo_lucro" 
                                     :value="custoLucro(automovel)"
                                     class="disabled w-full"
                                     mode="decimal" 
-                                    prefix="R$ "
                                     :minFractionDigits="2"
+                                    prefix="R$ "
                                     :readonly="true" />
                             </div>
                             <small class="block text-xs text-gray-400 mt-2">Custo com despesas de manutenção do veículo.</small>
@@ -322,43 +314,42 @@
                     <div>
                         <div class="my-2">
                             <div>
-                                <label for="gasolina_custo" class="block mr-2">Valor médio da gasolina</label>
+                                <label class="block mr-2">Valor médio da gasolina</label>
                                 <InputNumber 
-                                    inputId="gasolina_custo"
                                     class="w-full"
-                                    v-model="automovel.gasolina_custo" 
+                                    v-model="combustivel.gasolina.valor" 
                                     mode="decimal" 
+                                    :minFractionDigits="2"
                                     prefix="R$ "
-                                    :minFractionDigits="2" />
+                                />
                             </div>
                             <small class="block text-xs text-gray-400 mt-2">Valor médio da gasolina.</small>
                         </div>
     
                         <div class="my-2">
                             <div>
-                                <label for="gasolina_km" class="block mr-2">Consumo médio do veículo</label>
+                                <label class="block mr-2">Consumo médio do veículo</label>
                                 <InputNumber 
-                                    inputId="gasolina_km"
                                     class="w-full"
-                                    v-model="automovel.gasolina_km" 
+                                    v-model="automovel.consumo_gasolina" 
                                     mode="decimal" 
-                                    suffix="Km/l"
-                                    :minFractionDigits="2" />
+                                    :minFractionDigits="2"
+                                    suffix="Km/L"
+                                />
                             </div>
                             <small class="block text-xs text-gray-400 mt-2">Consumo médio do veículo com este combustível.</small>
                         </div>
     
                         <div class="my-2">
                             <div>
-                                <label for="custo_gasolina" class="block mr-2">Custo por Km com gasolina</label>
+                                <label class="block mr-2">Custo por Km com gasolina</label>
                                 <InputNumber 
-                                    inputId="custo_gasolina"
-                                    v-model="automovel.custo_gasolina" 
-                                    :value="custoGasolina(automovel)"
+                                    v-model="automovel.custo_km_gasolina"
+                                    :value="custoCombustivel('consumo_gasolina', 'custo_km_gasolina', automovel, combustivel.gasolina)"
                                     class="disabled w-full"
                                     mode="decimal" 
-                                    prefix="R$ "
                                     :minFractionDigits="2"
+                                    prefix="R$ "
                                     :readonly="true" />
                             </div>
                             <small class="block text-xs text-gray-400 mt-2">Custo com despesas de gasolina do veículo.</small>
@@ -369,43 +360,42 @@
     
                         <div class="my-2">
                             <div>
-                                <label for="alcool_custo" class="block mr-2">Valor médio da alcool</label>
+                                <label class="block mr-2">Valor médio da alcool</label>
                                 <InputNumber 
-                                    inputId="alcool_custo"
                                     class="w-full"
-                                    v-model="automovel.alcool_custo" 
+                                    v-model="combustivel.alcool.valor" 
                                     mode="decimal" 
+                                    :minFractionDigits="2"
                                     prefix="R$ "
-                                    :minFractionDigits="2" />
+                                />
                             </div>
                             <small class="block text-xs text-gray-400 mt-2">Valor médio da alcool.</small>
                         </div>
     
                         <div class="my-2">
                             <div>
-                                <label for="alcool_km" class="block mr-2">Consumo médio do veículo</label>
+                                <label class="block mr-2">Consumo médio do veículo</label>
                                 <InputNumber 
-                                    inputId="alcool_km"
                                     class="w-full"
-                                    v-model="automovel.alcool_km" 
+                                    v-model="automovel.consumo_alcool" 
                                     mode="decimal" 
-                                    suffix="Km/l"
-                                    :minFractionDigits="2" />
+                                    :minFractionDigits="2"
+                                    suffix="Km/L"
+                                />
                             </div>
                             <small class="block text-xs text-gray-400 mt-2">Consumo médio do veículo com este combustível.</small>
                         </div>
     
                         <div class="my-2">
                             <div>
-                                <label for="custo_alcool" class="block mr-2">Custo por Km com alcool</label>
+                                <label class="block mr-2">Custo por Km com alcool</label>
                                 <InputNumber 
-                                    inputId="custo_alcool"
-                                    v-model="automovel.custo_alcool" 
-                                    :value="custoAlcool(automovel)"
+                                    v-model="automovel.custo_km_alcool"
+                                    :value="custoCombustivel('consumo_alcool', 'custo_km_alcool', automovel, combustivel.alcool)"
                                     class="disabled w-full"
                                     mode="decimal" 
-                                    prefix="R$ "
                                     :minFractionDigits="2"
+                                    prefix="R$ "
                                     :readonly="true" />
                             </div>
                             <small class="block text-xs text-gray-400 mt-2">Custo com despesas de alcool do veículo.</small>
@@ -415,43 +405,42 @@
                     <div class="mx-2">
                         <div class="my-2">
                             <div>
-                                <label for="gas_custo" class="block mr-2">Valor médio da gas</label>
+                                <label class="block mr-2">Valor médio da gas</label>
                                 <InputNumber 
-                                    inputId="gas_custo"
                                     class="w-full"
-                                    v-model="automovel.gas_custo" 
+                                    v-model="combustivel.gas.valor" 
                                     mode="decimal" 
+                                    :minFractionDigits="2"
                                     prefix="R$ "
-                                    :minFractionDigits="2" />
+                                />
                             </div>
                             <small class="block text-xs text-gray-400 mt-2">Valor médio da gas.</small>
                         </div>
     
                         <div class="my-2">
                             <div>
-                                <label for="gas_km" class="block mr-2">Consumo médio do veículo</label>
+                                <label class="block mr-2">Consumo médio do veículo</label>
                                 <InputNumber 
-                                    inputId="gas_km"
                                     class="w-full"
-                                    v-model="automovel.gas_km" 
+                                    v-model="automovel.consumo_gas" 
                                     mode="decimal" 
-                                    suffix="Km/l"
-                                    :minFractionDigits="2" />
+                                    :minFractionDigits="2"
+                                    suffix="Km/L"
+                                />
                             </div>
                             <small class="block text-xs text-gray-400 mt-2">Consumo médio do veículo com este combustível.</small>
                         </div>
     
                         <div class="my-2">
                             <div>
-                                <label for="custo_gas" class="block mr-2">Custo por Km com gas</label>
+                                <label class="block mr-2">Custo por Km com gas</label>
                                 <InputNumber 
-                                    inputId="custo_gas"
-                                    v-model="automovel.custo_gas" 
-                                    :value="custoGas(automovel)"
+                                    v-model="automovel.custo_km_gas"
+                                    :value="custoCombustivel('consumo_gas', 'custo_km_gas', automovel, combustivel.gas)"
                                     class="disabled w-full"
                                     mode="decimal" 
-                                    prefix="R$ "
                                     :minFractionDigits="2"
+                                    prefix="R$ "
                                     :readonly="true" />
                             </div>
                             <small class="block text-xs text-gray-400 mt-2">Custo com despesas de gas do veículo.</small>
@@ -461,43 +450,42 @@
                     <div>
                         <div class="my-2">
                             <div>
-                                <label for="disel_custo" class="block mr-2">Valor médio da disel</label>
+                                <label class="block mr-2">Valor médio da disel</label>
                                 <InputNumber 
-                                    inputId="disel_custo"
                                     class="w-full"
-                                    v-model="automovel.disel_custo" 
+                                    v-model="combustivel.disel.valor" 
                                     mode="decimal" 
+                                    :minFractionDigits="2"
                                     prefix="R$ "
-                                    :minFractionDigits="2" />
+                                />
                             </div>
                             <small class="block text-xs text-gray-400 mt-2">Valor médio da disel.</small>
                         </div>
     
                         <div class="my-2">
                             <div>
-                                <label for="disel_km" class="block mr-2">Consumo médio do veículo</label>
+                                <label class="block mr-2">Consumo médio do veículo</label>
                                 <InputNumber 
-                                    inputId="disel_km"
                                     class="w-full"
-                                    v-model="automovel.disel_km" 
+                                    v-model="automovel.consumo_disel" 
                                     mode="decimal" 
-                                    suffix="Km/l"
-                                    :minFractionDigits="2" />
+                                    :minFractionDigits="2"
+                                    suffix="Km/L"
+                                />
                             </div>
                             <small class="block text-xs text-gray-400 mt-2">Consumo médio do veículo com este combustível.</small>
                         </div>
     
                         <div class="my-2">
                             <div>
-                                <label for="custo_disel" class="block mr-2">Custo por Km com disel</label>
+                                <label class="block mr-2">Custo por Km com disel</label>
                                 <InputNumber 
-                                    inputId="custo_disel"
-                                    v-model="automovel.custo_disel" 
-                                    :value="custoDisel(automovel)"
+                                v-model="automovel.custo_km_disel"
+                                    :value="custoCombustivel('consumo_disel', 'custo_km_disel', automovel, combustivel.disel)"
                                     class="disabled w-full"
                                     mode="decimal" 
-                                    prefix="R$ "
                                     :minFractionDigits="2"
+                                    prefix="R$ "
                                     :readonly="true" />
                             </div>
                             <small class="block text-xs text-gray-400 mt-2">Custo com despesas de disel do veículo.</small>
@@ -510,62 +498,58 @@
                 <div class="p-1 overflow-auto">
                     <div class="mb-1">
                         <div class="flex">
-                            <label for="custo_km_gasolina" class="w-3 p-2">Gasolina</label>
+                            <label class="w-3 p-2">Gasolina</label>
                             <InputNumber 
-                                    inputId="custo_km_gasolina"
-                                    v-model="automovel.custo_km_gasolina" 
-                                    :value="custoKmGasolina(automovel)"
-                                    class="w-full disabled"
-                                    mode="decimal" 
-                                    prefix="R$ "
-                                    :minFractionDigits="2"
-                                    :readonly="true" />
+                                v-model="automovel.custo_gasolina"
+                                :value="custoKmCombustiel('custo_km_gasolina', 'custo_gasolina', automovel, combustivel.gasolina, aplicativo)"
+                                class="w-full disabled"
+                                mode="decimal" 
+                                :minFractionDigits="2"
+                                prefix="R$ "
+                                :readonly="true" />
                         </div>
                     </div>
     
                     <div class="mb-1">
                         <div class="flex">
-                            <label for="custo_km_alcool" class="w-3 p-2">Alcool</label>
+                            <label class="w-3 p-2">Alcool</label>
                             <InputNumber 
-                                    inputId="custo_km_alcool"
-                                    v-model="automovel.custo_km_alcool" 
-                                    :value="custoKmAlcool(automovel)"
-                                    class="w-full disabled"
-                                    mode="decimal" 
-                                    prefix="R$ "
-                                    :minFractionDigits="2"
-                                    :readonly="true" />
+                                v-model="automovel.custo_alcool"
+                                :value="custoKmCombustiel('custo_km_alcool', 'custo_alcool', automovel, combustivel.alcool, aplicativo)"
+                                class="w-full disabled"
+                                mode="decimal" 
+                                :minFractionDigits="2"
+                                prefix="R$ "
+                                :readonly="true" />
                         </div>
                     </div>
     
                     <div class="mb-1">
                         <div class="flex">
-                            <label for="custo_km_gas" class="w-3 p-2">Gás</label>
+                            <label class="w-3 p-2">Gás</label>
                             <InputNumber 
-                                    inputId="custo_km_gas"
-                                    v-model="automovel.custo_km_gas" 
-                                    :value="custoKmGas(automovel)"
-                                    class="w-full disabled"
-                                    mode="decimal" 
-                                    prefix="R$ "
-                                    :minFractionDigits="2"
-                                    :readonly="true" />
+                                v-model="automovel.custo_gas"
+                                :value="custoKmCombustiel('custo_km_gas', 'custo_gas', automovel, combustivel.gas, aplicativo)"
+                                class="w-full disabled"
+                                mode="decimal" 
+                                :minFractionDigits="2"
+                                prefix="R$ "
+                                :readonly="true" />
                         </div>
                     </div>
     
                     <div class="mb-1">
                         <div class="flex">
-                            <label for="custo_km_disel" class="w-3 p-2">Disel</label>
+                            <label class="w-3 p-2">Disel</label>
     
                             <InputNumber 
-                                    inputId="custo_km_disel"
-                                    v-model="automovel.custo_km_disel" 
-                                    :value="custoKmDisel(automovel)"
-                                    class="w-full disabled"
-                                    mode="decimal" 
-                                    prefix="R$ "
-                                    :minFractionDigits="2"
-                                    :readonly="true" />
+                                v-model="automovel.custo_disel"
+                                :value="custoKmCombustiel('custo_km_disel', 'custo_disel', automovel, combustivel.disel, aplicativo)"
+                                class="w-full disabled"
+                                mode="decimal" 
+                                :minFractionDigits="2"
+                                prefix="R$ "
+                                :readonly="true" />
                         </div>
                     </div>
                 </div>
@@ -591,6 +575,21 @@
             return {
                 automovel: {},
                 selected: {},
+                aplicativo: 10,
+                combustivel: {
+                    gasolina: {
+                        valor: 5.3,
+                    },
+                    alcool: {
+                        valor: 3.8,
+                    },
+                    gas: {
+                        valor: 10,
+                    },
+                    disel: {
+                        valor: 5,
+                    },
+                },
                 list: [
                 {
                         id: 'novo', 
@@ -613,29 +612,16 @@
                         oleo_frequencia: 10000,
                         custo_oleo: 0,
 
-                        aplicativo: 10,
-
                         outros: 0,
                         custo_outros: 0,
 
-                        gasolina_custo: 0,
-                        gasolina_km: 0,
-                        custo_gasolina: 0,
+                        consumo_gasolina: 0,
                         custo_km_gasolina: 0,
-
-                        alcool_custo: 0,
-                        alcool_km: 0,
-                        custo_alcool: 0,
+                        consumo_alcool: 0,
                         custo_km_alcool: 0,
-
-                        gas_custo: 0,
-                        gas_km: 0,
-                        custo_gas: 0,
+                        consumo_gas: 0,
                         custo_km_gas: 0,
-
-                        disel_custo: 0,
-                        disel_km: 0,
-                        custo_disel: 0,
+                        consumo_disel: 0,
                         custo_km_disel: 0,
 
                         lucro: 4000,
@@ -662,29 +648,16 @@
                         oleo_frequencia: 10000,
                         custo_oleo: 0,
 
-                            aplicativo: 10,
-
                         outros: 5000,
                         custo_outros: 0,
 
-                        gasolina_custo: 5.2,
-                        gasolina_km: 11.5,
-                        custo_gasolina: 0,
+                        consumo_gasolina: 11.5,
                         custo_km_gasolina: 0,
-
-                        alcool_custo: 0,
-                        alcool_km: 0,
-                        custo_alcool: 0,
+                        consumo_alcool: 8.05,
                         custo_km_alcool: 0,
-
-                        gas_custo: 0,
-                        gas_km: 0,
-                        custo_gas: 0,
+                        consumo_gas: 0,
                         custo_km_gas: 0,
-
-                        disel_custo: 0,
-                        disel_km: 0,
-                        custo_disel: 0,
+                        consumo_disel: 0,
                         custo_km_disel: 0,
 
                         lucro: 2000,
@@ -711,29 +684,16 @@
                         oleo_frequencia: 10000,
                         custo_oleo: 0,
 
-                            aplicativo: 10,
-
                         outros: 1500,
                         custo_outros: 0,
 
-                        gasolina_custo: 4.89,
-                        gasolina_km: 22,
-                        custo_gasolina: 0,
+                        consumo_gasolina: 22,
                         custo_km_gasolina: 0,
-
-                        alcool_custo: 0,
-                        alcool_km: 0,
-                        custo_alcool: 0,
+                        consumo_alcool: 0,
                         custo_km_alcool: 0,
-
-                        gas_custo: 0,
-                        gas_km: 0,
-                        custo_gas: 0,
+                        consumo_gas: 0,
                         custo_km_gas: 0,
-
-                        disel_custo: 0,
-                        disel_km: 0,
-                        custo_disel: 0,
+                        consumo_disel: 0,
                         custo_km_disel: 0,
 
                         lucro: 4500,
@@ -772,53 +732,17 @@
             custoLucro(veiculo) {
                 veiculo.custo_lucro = veiculo.km_mes?veiculo.lucro/veiculo.km_mes:0;
             },
-            custoGasolina(veiculo) {
-                veiculo.custo_gasolina = veiculo.gasolina_km?veiculo.gasolina_custo/veiculo.gasolina_km:0;
+            custoCombustivel(km_field, custo_fild, veiculo, combustivel) {
+                veiculo[custo_fild] = veiculo[km_field]?combustivel.valor/veiculo[km_field]:0;
             },
-            custoAlcool(veiculo) {
-                veiculo.custo_alcool = veiculo.alcool_km?veiculo.alcool_custo/veiculo.alcool_km:0;
-            },
-            custoGas(veiculo) {
-                veiculo.custo_gas = veiculo.gas_km?veiculo.gas_custo/veiculo.gas_km:0;
-            },
-            custoDisel(veiculo) {
-                veiculo.custo_disel = veiculo.disel_km?veiculo.disel_custo/veiculo.disel_km:0;
-            },
-            custoKmGasolina(veiculo) {
-                veiculo.custo_km_gasolina = (veiculo.custo_veiculo + 
+            custoKmCombustiel(combustivel_km, custo_field,veiculo, combustivel, aplicativo) {
+                veiculo[custo_field] = (veiculo.custo_veiculo + 
                                              veiculo.custo_terceiro + 
                                              veiculo.custo_pneus + 
                                              veiculo.custo_oleo + 
                                              veiculo.custo_outros + 
                                              veiculo.custo_lucro + 
-                                             veiculo.custo_gasolina ) * (1 + (veiculo.aplicativo/100));
-            },
-            custoKmAlcool(veiculo) {
-                veiculo.custo_km_alcool = (veiculo.custo_veiculo + 
-                                             veiculo.custo_terceiro + 
-                                             veiculo.custo_pneus + 
-                                             veiculo.custo_oleo + 
-                                             veiculo.custo_outros + 
-                                             veiculo.custo_lucro + 
-                                             veiculo.custo_alcool ) * (1 + (veiculo.aplicativo/100));
-            },
-            custoKmGas(veiculo) {
-                veiculo.custo_km_gas = (veiculo.custo_veiculo + 
-                                             veiculo.custo_terceiro + 
-                                             veiculo.custo_pneus + 
-                                             veiculo.custo_oleo + 
-                                             veiculo.custo_outros + 
-                                             veiculo.custo_lucro + 
-                                             veiculo.custo_gas ) * (1 + (veiculo.aplicativo/100));
-            },
-            custoKmDisel(veiculo) {
-                veiculo.custo_km_disel = (veiculo.custo_veiculo + 
-                                             veiculo.custo_terceiro + 
-                                             veiculo.custo_pneus + 
-                                             veiculo.custo_oleo + 
-                                             veiculo.custo_outros + 
-                                             veiculo.custo_lucro + 
-                                             veiculo.custo_disel ) * (1 + (veiculo.aplicativo/100));
+                                             veiculo[combustivel_km] ) * (1 + (aplicativo/100));
             },
         }
     }
