@@ -591,10 +591,12 @@
             TabView, TabPanel, Button, Toast 
         },
         beforeMount() {
-            this.selected   = this.list[0];
-
-            this.onClickLoad();
-            this.onChangeAutomovel(this.selected);
+            if(localStorage.getItem('automovel')) {
+                this.onClickLoad();
+            } else {
+                this.selected   = this.list[0];
+                this.onChangeAutomovel(this.selected);
+            }
         },
         data() {
             return {
